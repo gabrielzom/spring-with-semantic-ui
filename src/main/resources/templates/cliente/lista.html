@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+          integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+
+<div class="ui container">
+    <div class="ui pointing menu">
+        <a class="item" href="/"> Home </a>
+        <a class="item active" href="/Clientes"> Clientes </a>
+        <div class="right menu">
+            <div class="item">
+                <div class="ui icon input">
+                    <input type="text" placeholder="Search..."> <i
+                        class="search link icon"></i>
+                </div>
+            </div>
+            <a class="ui item"> Logout </a>
+        </div>
+    </div>
+    <div style="font-size: 25px;" class="ui horizontal divider">LISTA DE CLIENTES</div>
+
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Nascimento</th>
+            <th>E-mail</th>
+            <th>Endereco</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cliente : ${clientes}">
+            <td th:text="${cliente.id}" data-label="#"></td>
+            <td th:text="${cliente.nome}" data-label="Nome"></td>
+            <td th:text="${cliente.cpf}" data-label="CPF"></td>
+            <td th:text="${cliente.nascimento}" data-label="Nascimento"></td>
+            <td th:text="${cliente.email}" data-label="E-mail"></td>
+            <td th:text="${cliente.endereco}" data-label="Endereco"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div style="font-size: 25px;" class="ui horizontal divider">#</div>
+
+    <a href="/Clientes/Cadastro">
+        <button class="ui primary button">Cadastrar Cliente</button>
+    </a>
+</div>
+
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+        integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+</script>
+</body>
+</html>

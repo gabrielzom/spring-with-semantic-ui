@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+          integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+<div class="ui container">
+    <div class="ui pointing menu">
+        <a class="item" href="/"> Home </a>
+        <a class="active item" href="/Clientes"> Clientes </a>
+        <div class="right menu">
+            <div class="item">
+                <div class="ui icon input">
+                    <input type="text" placeholder="Search..."> <i
+                        class="search link icon"></i>
+                </div>
+            </div>
+            <a class="ui item"> Logout </a>
+        </div>
+    </div>
+
+    <div class="ui container segment">
+        <div style="font-size: 25px;" class="ui horizontal divider">CADASTRAR CLIENTE</div>
+        <div class="ui raised very padded text container segment">
+
+
+
+            <div th:if="${msg != null}" class="ui negative message">
+                <i class="close icon"></i>
+                <div class="header">
+                    Erro ao inserir cliente.
+                </div>
+                <p>Dados de inserção faltando e/ou muito longos.</p>
+            </div>
+
+            <form th:action="@{/Clientes/Salvar}" method="POST" class="ui form" th:object="${cliente}">
+                <div class="ui horizontal divider">Informações pessoais</div>
+                <div class="field">
+                    <label>Nome completo</label>
+                    <div class="two fields">
+                        <div class="field">
+                            <input type="text" th:field="*{nome}" placeholder="Fulano de Tal">
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>E-mail</label>
+                    <div class="fields">
+                        <div class="twelve wide field">
+                            <input type="email" th:field="*{email}" placeholder="example@example.com">
+                        </div>
+                    </div>
+                    <label>CPF</label>
+                    <div class="four wide field">
+                        <input type="text" th:field="*{cpf}" placeholder="12345678900">
+                    </div>
+                    <label>Nascimento</label>
+                    <div class="four wide field">
+                        <input type="date" th:field="*{nascimento}" placeholder="Apt #">
+                    </div>
+                </div>
+                <div class="ui horizontal divider">ENDEREÇO</div>
+                <div class="field">
+                    <label>Logradouro</label>
+                    <div class="two fields">
+                        <div class="field">
+                            <input type="text" th:field="*{endereco.logradouro}" placeholder="Avenida Brasil">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Número</label>
+                    <div class="two fields">
+                        <div class="four wide field">
+                            <input type="number" th:field="*{endereco.numero}" placeholder="1000">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Bairro</label>
+                    <div class="two fields">
+                        <div class="field">
+                            <input type="text" th:field="*{endereco.bairro}" placeholder="Jardim Europa">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Cidade</label>
+                    <div class="two fields">
+                        <div class="field">
+                            <input type="text" th:field="*{endereco.cidade}" placeholder="Salvador">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two fields">
+                    <div class="field">
+                        <label>UF</label>
+                        <select class="ui fluid dropdown" th:field="*{endereco.uf}">
+                            <option value="">-- Selecione a UF</option>
+                            <option value="SP">SP</option>
+                            <option value="RJ">RJ</option>
+                            <option value="BA">BA</option>
+                        </select>
+                    </div>
+
+                </div>
+                <label>CEP</label>
+                <div class="two fields">
+                    <div class="four wide field">
+                        <input type="text" th:field="*{endereco.cep}" placeholder="02986080">
+                    </div>
+                </div>
+                <button type="submit" class="ui positive button">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+            integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+    <script>
+        $('.message .close')
+            .on('click', function () {
+                $(this)
+                    .closest('.message')
+                    .transition('fade')
+                ;
+            })
+        ;
+    </script>
+</body>
+</html>
