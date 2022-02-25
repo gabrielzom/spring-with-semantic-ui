@@ -16,7 +16,7 @@
 <div class="ui container">
     <div class="ui pointing menu">
         <a class="item" href="/"> Home </a>
-        <a class="item active" href="/Clientes"> Clientes </a>
+        <a class="item active" href="/Clientes/Lista"> Clientes </a>
         <div class="right menu">
             <div class="item">
                 <div class="ui icon input">
@@ -37,7 +37,8 @@
             <th>CPF</th>
             <th>Nascimento</th>
             <th>E-mail</th>
-            <th>Endereco</th>
+            <th>Foto</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -47,14 +48,19 @@
             <td th:text="${cliente.cpf}" data-label="CPF"></td>
             <td th:text="${cliente.nascimento}" data-label="Nascimento"></td>
             <td th:text="${cliente.email}" data-label="E-mail"></td>
-            <td th:text="${cliente.endereco}" data-label="Endereco"></td>
+            <td><img alt="Foto Perfil Cliente" width="128px" height="72px" th:src="${cliente.imageUrl}"></td>
+            <td>
+                <a th:href="@{/Clientes/Historico/{id} (id=${cliente.id})}">historico<i style="padding-left: 5px; padding-right: 5px" class="calendar alternate icon"></i></a> |
+                <a th:href="@{/Clientes/Editar/{id} (id=${cliente.id})}">editar<i style="padding-left: 5px; padding-right: 5px" class="edit icon"></i></a> |
+                <a th:href="@{/Clientes/Excluir/{id} (id=${cliente.id})}">excluir<i style="padding-left: 5px; padding-right: 5px" class="trash alternate icon"></i></a>
+            </td>
         </tr>
         </tbody>
     </table>
     <div style="font-size: 25px;" class="ui horizontal divider">#</div>
 
     <a href="/Clientes/Cadastro">
-        <button class="ui primary button">Cadastrar Cliente</button>
+        <button class="ui primary button">Cadastrar Cliente <i style="padding-left: 10px" class="address book icon"></i></button>
     </a>
 </div>
 

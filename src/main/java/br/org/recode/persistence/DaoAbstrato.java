@@ -11,7 +11,8 @@ public abstract class DaoAbstrato<Model, PK> {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
+
 	public EntityManager getEntityManager() {
 		return entityManager;
 	}

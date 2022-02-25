@@ -23,6 +23,15 @@ public class Cliente {
 	@JoinColumn(name = "endereco")
 	private Endereco endereco;
 
+	@Column(nullable = false, length = 255)
+	private String imageUrl;
+
+	
+
+	public String getImageUrl() {return imageUrl;}
+
+	public void setImageUrl(String imageUrl) {this.imageUrl = imageUrl;}
+
 	public Long getId() {
 		return id;
 	}

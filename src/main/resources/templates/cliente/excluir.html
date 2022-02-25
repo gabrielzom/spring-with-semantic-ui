@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+          integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+<div class="ui container">
+    <div class="ui pointing menu">
+        <a class="item" href="/"> Home </a>
+        <a class="active item" href="/Clientes/Lista"> Clientes </a>
+        <div class="right menu">
+            <div class="item">
+                <div class="ui icon input">
+                    <input type="text" placeholder="Search..."> <i
+                        class="search link icon"></i>
+                </div>
+            </div>
+            <a class="ui item"> Logout </a>
+        </div>
+    </div>
+
+    <div class="ui container segment">
+        <div style="font-size: 25px;" class="ui horizontal divider">EXCLUIR CLIENTE</div>
+        <div class="ui raised very padded text">
+
+            <form th:action="@{/Clientes/Excluir/Confirmar/{id} (id=${cliente.id})}" method="POST" class="ui form" th:object="${cliente}">
+                <div class="ui card">
+                    <div class="content">
+                        <div th:text="*{nome}" class="header"></div>
+                    </div>
+                    <div class="content">
+                        <div class="ui small feed">
+                            <div class="event">
+                                <div class="content">
+                                    <div th:text="'CPF: '+ *{cpf}" class="summary"></div>
+                                </div>
+                            </div>
+                            <div class="event">
+                                <div class="content">
+                                    <div th:text="'Nascimento: '+ *{nascimento}" class="summary"></div>
+                                </div>
+                            </div>
+                            <div class="event">
+                                <div class="content">
+                                    <div th:text="'E-mail: '+ *{email}" class="summary"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <div class="ui small feed">
+                            <div class="event">
+                                <div class="content">
+                                    <div th:text="*{endereco.logradouro}+', '+ *{endereco.numero}+' - '+*{endereco.bairro}+', '+*{endereco.cidade}+' - '+*{endereco.uf}+ ' '+ *{endereco.cep}" class="summary"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <button type="submit" class="ui button negative">Excluir este cliente</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+            integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+    <script>
+        $('.message .close')
+            .on('click', function () {
+                $(this)
+                    .closest('.message')
+                    .transition('fade')
+                ;
+            })
+        ;
+    </script>
+</body>
+</html>
