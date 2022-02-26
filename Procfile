@@ -1,1 +1,1 @@
-web: java 
+web: java -Dserver.port=$PORT -Dspring.profiles.active=dev
