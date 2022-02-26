@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -Dspring.profiles.active=dev
+web: java -Dserver.port=$PORT -Dspring.profiles.active=dev -jar target/crud-0.0.1-SNAPSHOT.jar
