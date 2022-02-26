@@ -48,7 +48,7 @@
             <td th:text="${cliente.cpf}" data-label="CPF"></td>
             <td th:text="${cliente.nascimento}" data-label="Nascimento"></td>
             <td th:text="${cliente.email}" data-label="E-mail"></td>
-            <td><img alt="Foto Perfil Cliente" width="128px" height="72px" th:src="${cliente.imageUrl}"></td>
+            <td><a target="_blank" th:href="@{{imgUrl} (imgUrl=${cliente.imageUrl}) }"><img alt="Foto Perfil Cliente" width="128px" height="72px"  th:src="${cliente.imageUrl}"></a></td>
             <td>
                 <a th:href="@{/Clientes/Historico/{id} (id=${cliente.id})}">historico<i style="padding-left: 5px; padding-right: 5px" class="calendar alternate icon"></i></a> |
                 <a th:href="@{/Clientes/Editar/{id} (id=${cliente.id})}">editar<i style="padding-left: 5px; padding-right: 5px" class="edit icon"></i></a> |
