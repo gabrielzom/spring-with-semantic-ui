@@ -27,7 +27,7 @@ public class ClienteController {
 	
 	@GetMapping("/Cadastro")
 	public String cadastrar(Cliente cliente) {
-		return "/cliente/cadastro";
+		return "cliente/cadastro";
 	}
 
 	@PostMapping("/Cadastro/Salvar")
@@ -48,20 +48,20 @@ public class ClienteController {
 		} catch (DataIntegrityViolationException e) {
 			System.out.println("-- EXCEPTION: " + e.getMessage());
 			modelMap.addAttribute("msg", "Dados inválidos");
-			return "/cliente/cadastro";
+			return "cliente/cadastro";
 		}
 	}
 
 	@GetMapping("/Lista")
 	public String listar(ModelMap modelMap) {
 		modelMap.addAttribute("clientes", clienteDao.findAll());
-		return "/cliente/lista";
+		return "cliente/lista";
 	}
 
 	@GetMapping("/Editar/{id}")
 	public String atualizar(@PathVariable("id") Long id, ModelMap modelMap) {
 		modelMap.addAttribute("cliente", clienteDao.findByPk(id));
-		return "/cliente/atualizar";
+		return "cliente/atualizar";
 	}
 
 	@PostMapping("/Editar/Confirmar")
@@ -73,7 +73,7 @@ public class ClienteController {
 	@GetMapping("/Excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap modelMap) {
 		modelMap.addAttribute("cliente",clienteDao.findByPk(id));
-		return "/cliente/excluir";
+		return "cliente/excluir";
 	}
 
 	@PostMapping("/Excluir/Confirmar/{id}")
