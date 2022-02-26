@@ -12,7 +12,7 @@ import java.io.IOException;
 public class ClienteUploadImageWebService {
 
     private static final String baseUrl = "https://api.imgur.com";
-    private static HttpHeaders headers = new HttpHeaders();
+    private static final HttpHeaders headers = new HttpHeaders();
     private static LinkedMultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
     private static HttpEntity<LinkedMultiValueMap<String, Object>> httpRequestEntity;
     private static ResponseUploadImageWebService responseUploadImageWebService;
