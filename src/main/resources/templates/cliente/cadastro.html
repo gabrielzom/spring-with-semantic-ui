@@ -30,12 +30,14 @@
     <div class="ui container segment">
         <div style="font-size: 25px;" class="ui horizontal divider">CADASTRAR CLIENTE</div>
         <div class="ui raised very padded text container segment">
+
+
             <div th:if="${msg != null}" class="ui negative message">
                 <i class="close icon"></i>
                 <div class="header">
                     Erro ao inserir cliente.
                 </div>
-                <p>Dados de inserção faltando e/ou muito longos.</p>
+                <p th:text="${msg}"></p>
             </div>
 
             <form th:action="@{/Clientes/Cadastro/Salvar}" enctype="multipart/form-data" method="POST" class="ui form" th:object="${cliente}">

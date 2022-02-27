@@ -28,6 +28,17 @@
     </div>
 
     <div class="ui container segment">
+
+
+        <div th:if="${msg != null}" class="ui negative message">
+            <i class="close icon"></i>
+            <div class="header">
+                Erro ao excluir cliente.
+            </div>
+            <p th:text="${msg}"></p>
+        </div>
+
+
         <div style="font-size: 25px;" class="ui horizontal divider">EXCLUIR CLIENTE</div>
         <div class="ui raised very padded text">
 

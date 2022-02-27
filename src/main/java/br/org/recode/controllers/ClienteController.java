@@ -1,10 +1,12 @@
 package br.org.recode.controllers;
 
-import br.org.recode.services.ClienteUploadImageWebService;
+import br.org.recode.services.ClienteImageWebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import br.org.recode.models.Cliente;
 import br.org.recode.persistence.ClienteDao;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 //@EnableWebSecurity
 //@EnableAuthorizationServer
@@ -34,7 +37,9 @@ public class ClienteController {
 	public String salvarCadastro(Cliente cliente, ModelMap modelMap, @RequestParam("imagem") MultipartFile image) {
 		try {
 			if (!image.isEmpty()) {
-				cliente.setImageUrl(ClienteUploadImageWebService.UploadClienteImageAndGetLink(image, this.clientId));
+				String [] imageData = ClienteImageWebService.uploadImageAndGetData(image, this.clientId);
+				cliente.setImageUrl(imageData[0]);
+				cliente.setImageDeleteHash(imageData[1]);
 			}
 
 		} catch (IOException e) {
@@ -47,8 +52,8 @@ public class ClienteController {
 
 		} catch (DataIntegrityViolationException e) {
 			System.out.println("-- EXCEPTION: " + e.getMessage());
-			modelMap.addAttribute("msg", "Dados inválidos");
-			return "cliente/cadastro";
+			modelMap.addAttribute("msg", "Dados de inserção faltando e/ou muito longos.");
+			return "/cliente/cadastro";
 		}
 	}
 
@@ -71,14 +76,24 @@ public class ClienteController {
 	}
 
 	@GetMapping("/Excluir/{id}")
-	public String excluir(@PathVariable("id") Long id, ModelMap modelMap) {
+	public String excluir(@PathVariable("id") Long id, ModelMap modelMap, String msg) {
+		modelMap.addAttribute("msg", msg);
 		modelMap.addAttribute("cliente",clienteDao.findByPk(id));
 		return "cliente/excluir";
 	}
 
 	@PostMapping("/Excluir/Confirmar/{id}")
-	public String confirmarExclusao(@PathVariable("id") Long id) {
-		clienteDao.delete(id);
-		return "redirect:/Clientes/Lista";
+	public String confirmarExclusao(@PathVariable("id") Long id, ModelMap modelMap) {
+
+		Cliente cliente = clienteDao.findByPk(id);
+
+		if (ClienteImageWebService.deleteImage(cliente.getImageDeleteHash(), clientId).equals("Error")) {
+			return excluir(id, modelMap, "Não foi possível excluir o cliente. Contate o suporte técnico.");
+
+		} else {
+			clienteDao.delete(id);
+			return "redirect:/Clientes/Lista";
+		}
+
 	}
 }

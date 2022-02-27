@@ -26,7 +26,17 @@ public class Cliente {
 	@Column(nullable = false, length = 255)
 	private String imageUrl;
 
-	
+	@Column(nullable = false, columnDefinition = "char(15)")
+	private String imageDeleteHash;
+
+
+	public String getImageDeleteHash() {
+		return imageDeleteHash;
+	}
+
+	public void setImageDeleteHash(String imageDeleteHash) {
+		this.imageDeleteHash = imageDeleteHash;
+	}
 
 	public String getImageUrl() {return imageUrl;}
 
