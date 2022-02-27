@@ -54,6 +54,7 @@ public class ClienteImageWebService {
                             String.class
                     );
 
+            System.out.println(response);
             return (response.toString());
 
         } catch (RestClientException e) {
