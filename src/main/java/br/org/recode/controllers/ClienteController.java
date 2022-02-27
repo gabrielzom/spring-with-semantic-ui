@@ -53,7 +53,7 @@ public class ClienteController {
 		} catch (DataIntegrityViolationException e) {
 			System.out.println("-- EXCEPTION: " + e.getMessage());
 			modelMap.addAttribute("msg", "Dados de inserção faltando e/ou muito longos.");
-			return "/cliente/cadastro";
+			return "cliente/cadastro";
 		}
 	}
 
